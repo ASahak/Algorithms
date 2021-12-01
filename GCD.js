@@ -1,4 +1,4 @@
-// My solutions
+// My solution
 const GCD = (a, b) => {
     const [arr1, arr2] = [[], []];
     const result = [];
