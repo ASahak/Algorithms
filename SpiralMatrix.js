@@ -1,6 +1,6 @@
 const arr = [
-    [1, 2, 3, 4, 5, 6, 7],
-    [8, 9, 10, 11, 12, 13, 14],
+    [1,  2,  3,  4,  5,  6,  7],
+    [8,  9, 10, 11, 12, 13, 14],
     [15, 16, 17, 18, 19, 20, 21],
     [22, 23, 24, 25, 26, 27, 28],
     [29, 30, 31, 32, 33, 34, 35],
@@ -14,32 +14,27 @@ const SpiralMatrix = (array) => {
     let latestItem = null;
     let x = 0,
         y = 0,
-        i = 0,
-        item = null;
+        i = 0;
 
     while(!latestItem) {
         for (let firstRowItem = y; firstRowItem < array[x].length - x; firstRowItem++) {
-            item = array[x][firstRowItem];
-            spiralWay.push(item);
+            spiralWay.push(array[x][firstRowItem]);
             i++;
         }
         for (let lastColumnItem = x + 1; lastColumnItem < array.length - x; lastColumnItem++) {
-            item = array[lastColumnItem][array[lastColumnItem].length - x - 1];
-            spiralWay.push(item);
+            spiralWay.push(array[lastColumnItem][array[lastColumnItem].length - x - 1]);
             i++;
         }
         for (let lastRowItem = array[array.length - x - 1].length - x - 2; lastRowItem >= y; lastRowItem--) {
-            item = array[array.length - x - 1][lastRowItem];
-            spiralWay.push(item);
+            spiralWay.push(array[array.length - x - 1][lastRowItem]);
             i++;
         }
         for (let firstColumnItem = array[array.length - x - 1].length - x - 2; firstColumnItem > y; firstColumnItem--) {
-            item = array[firstColumnItem][y];
-            spiralWay.push(item);
+            spiralWay.push(array[firstColumnItem][y]);
             i++;
         }
         if (i === maxLength) {
-            latestItem = item;
+            latestItem = spiralWay[spiralWay.length - 1];
         } else {
             x++;
             y++;
@@ -51,3 +46,40 @@ const SpiralMatrix = (array) => {
     }
 };
 console.log(SpiralMatrix(arr));
+
+
+// Best solution
+const input = [
+    [1,  2,  3,  4,  5,  6,  7],
+    [8,  9, 10, 11, 12, 13, 14],
+    [15, 16, 17, 18, 19, 20, 21],
+    [22, 23, 24, 25, 26, 27, 28],
+    [29, 30, 31, 32, 33, 34, 35],
+    [36, 37, 38, 39, 40, 41, 42],
+    [43, 44, 45, 46, 47, 48, 49],
+];
+
+function run(input, result) {
+    if (input.length === 0) {
+        return result;
+    }
+    // add the first row to result
+    result = result.concat(input.shift());
+    // add the last element of each remaining row
+    input.forEach(function(rightEnd) {
+        result.push(rightEnd.pop());
+    });
+    // add the last row in reverse order
+    result = result.concat(input.pop().reverse());
+    // add the first element in each remaining row (going upwards)
+    const tmp = [];
+    input.forEach(function(leftEnd) {
+        tmp.push(leftEnd.shift());
+    });
+    result = result.concat(tmp.reverse());
+    return run(input, result);
+}
+
+const result = run(input, []);
+
+console.log( 'result', result);
