@@ -2,10 +2,11 @@
 
 function findEvenIndex(arr)
 {
-  let commonSum = 0;
-  for (let i = 0; i < arr.length; i++) {
-      commonSum+=arr[i];
-  }
+  const commonSum = arr.reduce((acc, item) => {
+    acc+=item;
+    return acc;
+  }, 0);
+  
   let leftSum = 0;
   for (let i = 0; i < arr.length; i++) {
     if((commonSum - arr[i]) / 2 === leftSum) return i
