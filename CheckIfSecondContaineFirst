@@ -1,0 +1,13 @@
+const arr1 =[1, 2, 3]
+const arr2  =[5, 4, 7, 33, 1, 2, 3]
+
+function checkIfContaine (arr1, arr2) {
+    let count = 0;
+    if(arr1.length > arr2.length) return false;
+    for (let i = 0; i < arr2.length; i++) {
+        if(arr1[count] === arr2[i]) count++;
+        else count = 0
+    }
+    return count === arr1.length;
+}
+console.log(checkIfContaine(arr1, arr2));
