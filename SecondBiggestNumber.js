@@ -1,16 +1,14 @@
-const arr = [55,77,44,55,66,11,88];
-
-
 function findSecondBiggestNumber(arrNumbers) {
-  let first = 0;
-  let second = 0;
+  let first = -Infinity;
+  let second = -Infinity;
 
-  for(let i = 0; i <= arrNumbers.length; i++) {
-    if(arrNumbers[i] > first) {
-      second = max;
-      first = arrNumbers[i];
-    } else if(arrNumbers[i] > second && arrNumbers[i] < first) {
-      second = arrNumbers[i]
+  for(let i = 0; i < arrNumbers.length; i++) {
+    const num = arrNumbers[i]
+    if(num > first) {
+      second = first;
+      first = num;
+    } else if(num > second && num < first) {
+      second = num
     }
   }
 
